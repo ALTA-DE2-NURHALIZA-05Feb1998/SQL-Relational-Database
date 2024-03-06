@@ -1,5 +1,3 @@
-1) Create database alta_online_shop.
-Sulisi SQL:
 -- Database: alta_online_shop
 -- DROP DATABASE IF EXISTS alta_online_shop;
 CREATE DATABASE alta_online_shop
@@ -11,11 +9,7 @@ CREATE DATABASE alta_online_shop
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1
     IS_TEMPLATE = False;
-
-
-2) Dari schema Olshop yang telah kamu kerjakan di, Implementasikanlah menjadi table pada MySQL.
-    2.a Create table user
-    Sulisi SQL:
+--a.	Create table pelanggan
 create table pelanggan (
 	id_pelanggan serial,
 	nama text,
@@ -27,11 +21,6 @@ create table pelanggan (
 	updated_at timestamp,
 	primary key(id_pelanggan)
 );
-
-
-    2.b Create table product, product_type, product_description, payment_method.
-    Sulisi SQL:
---table product diletakkan dibawah, dahulukan membuat table product_type dan lainnya
 --membuat table product_type
 create table produk_type (
 	id serial,
@@ -46,6 +35,7 @@ create table produk_deskripsi (
 	spesifikasi text,
 	primary key (id)
 );
+
 --membuat tabel payment_method
 create table payment_method (
 	id serial,
@@ -66,10 +56,7 @@ create table produk(
 	foreign key(produk_desc_id) references produk_deskripsi(id),
 	foreign key(merk_id) references merk(id)
 );
-
-    2.c Create table transaction, transaction detail.
-    Sulisi SQL:
---membuat table transaction
+--1.	membuat table transaksi
 create table transaksi(
 	id_transaksi serial,
 	tanggal timestamp,
@@ -93,8 +80,6 @@ create table detail_transaksi(
 	foreign key(id_transaksi) references transaksi(id_transaksi)
 );
 
-3) Create table kurir dengan field id, name, created_at, updated_at.
-Sulisi SQL:
 --membuat table kurir
 create table kurir(
 	field_id serial,
@@ -103,27 +88,11 @@ create table kurir(
 	updated_at timestamp
 );
 
-4) Tambahkan ongkos_dasar column di tabel kurir.
-Sulisi SQL:
 --menambahkan kolom ongkos_dasar ditabel kurir
 alter table kurir add column ongkos_dasar int;
 
-5) Rename tabel kurir menjadi shipping.
-Sulisi SQL:
 --mengubah nama table kurir menjadi shipping
 alter table kurir rename to shipping;
 
-6) Hapus / Drop tabel shipping karena ternyata tidak dibutuhkan.
-Sulisi SQL:
 --menghapus tabel shipping
 drop table shipping;
-
-7) Silahkan menambahkan entity baru dengan relation 1-to-1, 1-to-many, many-to-many. Seperti:
-    7.a) 1-to-1: payment_method dengan description.
-    Sulisi SQL:
-
-    7.b) 1-to-many: user dengan alamat.
-    Sulisi SQL:
-
-    7.c) many-to-many: user dengan payment_method menjadi user_payment_method_detail.
-    Sulisi SQL:
